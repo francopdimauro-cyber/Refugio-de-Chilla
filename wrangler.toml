@@ -1,0 +1,7 @@
+# Web publica de El Refugio de Chilla (independiente de Agent Builder)
+name = "refugio-de-chilla"
+compatibility_date = "2026-11-15"
+
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
