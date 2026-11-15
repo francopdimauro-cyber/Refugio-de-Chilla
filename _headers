@@ -1,0 +1,4 @@
+# Solo el dominio de pruebas de Cloudflare queda fuera de los buscadores.
+# Una futura web oficial con dominio propio no heredará este noindex.
+https://refugio-de-chilla.francopdimauro.workers.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive
