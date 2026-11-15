@@ -1,0 +1,42 @@
+name: Verificar Refu en Workers (staging)
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verificar-refu.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-refu:
+    runs-on: ubuntu-latest
+    env:
+      SITE: https://refugio-de-chilla.francopdimauro.workers.dev
+      API: https://agent-factory-free.francopdimauro.workers.dev
+      CHAT: 479ea264-dee5-4b81-9477-8d9af08f5b24
+    steps:
+      - name: Verificar que la web publicada incluye el ID de Refu
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 12 --retry-all-errors --retry-delay 5 "$SITE/js/refu.js" -o /tmp/refu.js
+          grep -Fq "$CHAT" /tmp/refu.js
+          grep -Fq "$API" /tmp/refu.js
+          echo "Script de Refu publicado y configurado"
+      - name: Verificar la ficha pública y origen autorizado
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTTP=$(curl -sSL --retry 3 --retry-all-errors --retry-delay 3 -H "Origin: $SITE" -D /tmp/headers -o /tmp/chat.json -w '%{http_code}' "$API/api/public/chats/$CHAT")
+          echo "Consulta de Refu HTTP: $HTTP"
+          test "$HTTP" = 200
+          grep -Fiq "Access-Control-Allow-Origin: $SITE" /tmp/headers
+          python3 -c 'import json; d=json.load(open("/tmp/chat.json")); assert d.get("available") is True, d; assert "Refu" in d.get("title",""), d; print("Refu activo y CORS correcto")'
+      - name: Probar una respuesta real de Refu con IA
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTTP=$(curl -sSL --connect-timeout 10 --max-time 65 -H "Origin: $SITE" -H "Content-Type: application/json" -D /tmp/reply.headers -o /tmp/reply.json -w '%{http_code}' --data '{"messages":[{"role":"user","content":"Hola Refu, ¿cómo puedo reservar mesa?"}]}' "$API/api/public/chats/$CHAT/messages")
+          echo "Respuesta del chat HTTP: $HTTP"
+          if [ "$HTTP" != 200 ]; then head -c 800 /tmp/reply.json; echo; exit 1; fi
+          python3 -c 'import json; d=json.load(open("/tmp/reply.json")); v=d.get("reply",""); assert isinstance(v,str) and len(v.strip())>10, d; print("Respuesta recibida, longitud:",len(v))'
