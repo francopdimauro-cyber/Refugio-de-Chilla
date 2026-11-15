@@ -1,0 +1,35 @@
+name: Comprobar web publicada
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verificar-web.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar contenido, scripts y fotos publicadas byte por byte
+        shell: bash
+        run: |
+          set -euo pipefail
+          SITE='https://refugio-de-chilla.francopdimauro.workers.dev'
+          for FILE in index.html css/styles.css js/main.js js/refu.js img/plato-1.jpg img/plato-2.jpg img/plato-3.jpg img/sobre-nosotros.jpg; do
+            mkdir -p "/tmp/live/$(dirname "$FILE")"
+            echo "Comprobando $FILE"
+            HTTP=$(curl -sSL --retry 5 --retry-all-errors --retry-delay 2 --connect-timeout 10 --max-time 30 -o "/tmp/live/$FILE" -w '%{http_code}' "$SITE/$FILE")
+            echo "HTTP $HTTP /$FILE"
+            test "$HTTP" = 200
+            cmp "$FILE" "/tmp/live/$FILE"
+            echo "OK, coincide byte a byte: $FILE"
+          done
+          HTTP=$(curl -sSL -o /dev/null -w '%{http_code}' "$SITE/agents/refu.json")
+          echo "Archivo interno no publicado: HTTP $HTTP"
+          test "$HTTP" = 404
+          grep -Fq 'Cocina de producto,' /tmp/live/index.html
+          echo "Web real verificada"
