@@ -1,18 +1,16 @@
 /* Refu — asistente con IA de El Refugio de Chilla.
  *
  * Carga el widget de chat del Agent Builder con la identidad visual de esta web.
- * Para activarlo, rellena los dos valores de abajo con lo que muestra Agent Builder
- * en la pestaña «Chat web» (código para pegar en la web):
- *   - api:    la URL del Worker, p. ej. https://agent-factory-free.TU-SUBDOMINIO.workers.dev
- *   - chatId: el valor de data-chat
- * Mientras estén vacíos, la web funciona igual y no se muestra el chat.
+ * Configurado para el chat público real de Refu en Agent Builder.
+ * El dominio de pruebas autorizado es refugio-de-chilla.francopdimauro.workers.dev.
+ * Antes de cambiar al dominio definitivo, añade ese origen al chat en Agent Builder.
  */
 (() => {
   'use strict';
 
   const REFU = {
     api: 'https://agent-factory-free.francopdimauro.workers.dev',
-    chatId: '',
+    chatId: '479ea264-dee5-4b81-9477-8d9af08f5b24',
   };
 
   if (!REFU.api || !REFU.chatId) return;
