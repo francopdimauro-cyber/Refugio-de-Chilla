@@ -1,45 +1,35 @@
-# El Refugio de Chilla — web independiente
+# El Refugio de Chilla — web oficial de trabajo
 
-Web estática de **El Refugio de Chilla (Candeleda, Ávila)**. Este repositorio está separado de [Agent Builder](https://github.com/francopdimauro-cyber/Agent-Builder), que proporciona el backend del agente de conversación **Refu**.
+Esta es la **web original proporcionada por el cliente**, restaurada desde el archivo `EL REFUGIO DE CHILLA.zip` el 15 de noviembre de 2026. Se aloja en un Worker independiente del constructor [Agent Builder](https://github.com/francopdimauro-cyber/Agent-Builder).
 
-## Archivos
+## Enlaces
 
-- `index.html` — página web completa, con estilos incorporados.
-- `agents/refu.json` — configuración de Refu para importar en Agent Builder.
+- **Web pública:** https://refugio-de-chilla.francopdimauro.workers.dev/
+- **Repositorio:** https://github.com/francopdimauro-cyber/Refugio-de-Chilla
+- **Motor de IA:** https://agent-factory-free.francopdimauro.workers.dev/
 
-## Estado
+## Estructura original
 
-La web está **publicada en Cloudflare Workers** como servicio independiente, con despliegue automático al actualizar la rama `main`.
+- `index.html`: página completa, incluyendo navegación, carta, formulario de reservas y mapa.
+- `css/styles.css`: estilos originales, temas claro/oscuro y responsive.
+- `js/main.js`: interactividad y envío del formulario de reservas.
+- `js/refu.js`: integración del widget de chat de Refu.
+- `img/`: **cuatro fotografías originales** del ZIP.
+- `agents/refu.json`: configuración del agente, no publicada como activo público.
+- `scripts/build.mjs`: copia únicamente `index.html`, `css/`, `js/` e `img/` a `dist/`.
 
-El código de integración está preparado en `index.html` y obtiene `widget.js` del Worker real:
+La rama `main` está conectada a Cloudflare Builds, que ejecuta `npm run build` y `npx wrangler deploy`.
 
-```html
-<script
-  src="https://agent-factory-free.francopdimauro.workers.dev/widget.js"
-  data-chat="PENDIENTE_ID_CHAT"
-  data-label="Pregunta a Refu"
-  data-accent="#1f5c4a"
-  defer
-></script>
-```
+## Estado del chat de Refu
 
-**Importante:** `PENDIENTE_ID_CHAT` no es un identificador funcional. Hasta sustituirlo por el ID real, el widget no se inicia. No confundir «script integrado» con «chat activo».
+El archivo `js/refu.js` ya apunta al Worker real del motor. El campo `chatId` **aún está vacío**: el chat no aparece hasta crear un chat público en Agent Builder y obtener un identificador real. Esto evita mostrar un widget averiado.
 
-## Activar el chat
+Para activarlo: accede a Agent Builder, importa `agents/refu.json` si Refu todavía no existe, actívalo, crea un chat público y autoriza el origen `https://refugio-de-chilla.francopdimauro.workers.dev` (sin ruta). Copia el ID al campo `chatId` de `js/refu.js`. Guarda; el push a `main` actualizará la web.
 
-1. Acceder a [Agent Builder](https://agent-factory-free.francopdimauro.workers.dev), iniciar sesión e importar `agents/refu.json` desde **Agentes**.
-2. Guardar y activar el agente Refu.
-3. En **Chat web**, crear un chat público asociado a Refu.
-4. Añadir a sus **webs autorizadas** el origen exacto del sitio publicado, exactamente `https://refugio-de-chilla.francopdimauro.workers.dev` (sin barra final ni rutas).
-5. Copiar el identificador real del chat y reemplazar `PENDIENTE_ID_CHAT` en `index.html`. Guardar los cambios y desplegar de nuevo.
-6. Probar el chat desde el dominio autorizado, verificando una respuesta del backend.
+## Reservas
 
-## Publicación
+El diseño original incluye un formulario que utiliza **FormSubmit** hacia `elrefugiodechilla@gmail.com`; no se ha modificado. Comprueba con el propietario que la dirección receptora esté autorizada y que FormSubmit esté activado. Una solicitud de reserva no es una confirmación automática de disponibilidad.
 
-La web se aloja como sitio estático en el Worker independiente **`refugio-de-chilla`**. URL publicada: **https://refugio-de-chilla.francopdimauro.workers.dev/**. Cloudflare Builds está vinculado a este repositorio y ejecuta `npm run build` seguido de `npx wrangler deploy` al recibir cambios en `main`. El Worker del Agent Builder sigue sirviendo la API y el widget; **no se despliega esta web sobre `agent-factory-free`**. El proceso `scripts/build.mjs` solo copia `index.html` a `dist/` para evitar exponer `agents/refu.json` u otros archivos internos.
+## Seguridad del despliegue
 
-Antes de publicarla para clientes, verificar el contenido editorial: horarios, carta, datos de contacto y disponibilidad real de servicios. No hay formulario de reservas operativo; la página dirige las reservas al teléfono.
-
-## Desarrollo local
-
-Abre `index.html` en un navegador para revisar el diseño estático. Para verificar el chat hace falta el ID de chat real y un origen autorizado por Agent Builder.
+Solo se sirven los archivos de la web incluidos en `dist/`. El JSON de configuración de Refu y otros archivos internos quedan fuera de los activos públicos de Cloudflare.
