@@ -33,3 +33,10 @@ jobs:
           test "$HTTP" = 404
           grep -Fq 'Cocina de producto,' /tmp/live/index.html
           echo "Web real verificada"
+      - name: Verificar que solo el dominio staging queda fuera de los buscadores
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSI --retry 5 --retry-all-errors --retry-delay 2 'https://refugio-de-chilla.francopdimauro.workers.dev/' -o /tmp/staging-headers
+          grep -Ei '^x-robots-tag:.*noindex' /tmp/staging-headers
+          echo 'STAGING NOINDEX confirmado'
