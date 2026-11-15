@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>El Refugio de Chilla · Candeleda, Ávila</title>
+<meta name="description" content="Restaurante El Refugio de Chilla, en Candeleda (Ávila), a los pies de la Sierra de Gredos. Carta, horarios y reservas." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4efe4; --paper:#faf7f0; --ink:#241f1a; --stone:#78716a; --line:rgba(36,31,26,.14);
+    --pine:#1f5c4a; --pine-ink:#f4efe4; --rust:#a8481f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Work Sans",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,.serif{font-family:"Fraunces",Georgia,serif}
+  a{color:inherit}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+
+  /* ---- Hero ---- */
+  .hero{padding:72px 0 56px; border-bottom:1px solid var(--line); animation:rise .7s cubic-bezier(.22,1,.36,1) both}
+  @keyframes rise{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  .hero .kicker{color:var(--pine); font-weight:600; font-size:15px; margin:0 0 14px}
+  .hero h1{font-size:clamp(40px,7vw,68px); font-weight:600; line-height:1.03; letter-spacing:-.01em; margin:0 0 18px; max-width:11ch}
+  .hero p{color:var(--stone); font-size:18px; max-width:46ch; margin:0 0 28px}
+  .hero .meta{display:flex; flex-wrap:wrap; gap:6px 28px; font-size:15px}
+  .hero .meta span{color:var(--stone)}
+  .hero .meta strong{font-weight:600}
+
+  /* ---- Carta (menú real, como una carta impresa) ---- */
+  .menu{padding:64px 0}
+  .menu h2{font-size:30px; font-weight:600; margin:0 0 6px}
+  .menu .sub{color:var(--stone); margin:0 0 40px; max-width:50ch}
+  .course{margin-bottom:40px}
+  .course h3{font-size:14px; font-weight:600; letter-spacing:.02em; color:var(--pine); margin:0 0 4px; text-transform:uppercase}
+  .course small{display:block; color:var(--stone); font-weight:400; text-transform:none; font-size:13px; margin-bottom:16px}
+  .dish{display:flex; gap:18px; padding:14px 0; border-top:1px solid var(--line)}
+  .dish:last-child{border-bottom:1px solid var(--line)}
+  .dish .name{font-family:"Fraunces",Georgia,serif; font-size:18px; font-weight:500; flex:none; width:100%}
+  .dish .desc{color:var(--stone); font-size:15px; margin-top:3px}
+  .note{font-size:14px; color:var(--stone); margin-top:22px; font-style:italic}
+
+  /* ---- Reservas / Cómo llegar ---- */
+  .split{padding:56px 0 80px; display:grid; grid-template-columns:1.1fr .9fr; gap:56px; border-top:1px solid var(--line)}
+  .split h2{font-size:26px; font-weight:600; margin:0 0 14px}
+  .split p{color:var(--stone); margin:0 0 16px}
+  .btn{display:inline-flex; align-items:center; gap:8px; background:var(--rust); color:#fff; font-weight:600; font-size:15px;
+       padding:13px 22px; border-radius:10px; text-decoration:none; transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px -8px rgba(168,72,31,.55)}
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:26px 28px}
+  .card dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:8px 16px; font-size:15px}
+  .card dt{color:var(--stone)}
+  .card dd{margin:0; font-weight:500}
+
+  footer{border-top:1px solid var(--line); padding:28px 0; color:var(--stone); font-size:14px}
+
+  @media (max-width:760px){
+    .split{grid-template-columns:1fr; padding-bottom:64px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Candeleda · Sierra de Gredos</p>
+    <h1>El Refugio de Chilla</h1>
+    <p>Cocina de producto de la zona, a los pies de la Sierra de Gredos. Comidas y cenas todos los días, en Candeleda (Ávila).</p>
+    <div class="meta">
+      <span>Comidas <strong>13:00–16:00</strong></span>
+      <span>Cenas <strong>20:00–23:30</strong></span>
+      <span><strong>920 380 635</strong></span>
+    </div>
+  </div>
+</header>
+
+<section class="menu">
+  <div class="wrap">
+    <h2>La carta</h2>
+    <p class="sub">De temporada; algunos platos pueden cambiar. Las sugerencias del día se consultan en sala.</p>
+
+    <div class="course">
+      <h3>Para empezar</h3>
+      <div class="dish"><div class="name">Crujiente de oreja de cerdo</div><div class="desc">Con salsa brava.</div></div>
+      <div class="dish"><div class="name">Arroz socarrat de cabrito</div><div class="desc">Con crema de ajo asado y limón rallado.</div></div>
+      <div class="dish"><div class="name">Carpaccio de ternera</div><div class="desc">Con queso curado de la zona y aderezo de steak tartar.</div></div>
+      <div class="dish"><div class="name">Croquetas de carrilleras de ibérico</div><div class="desc">8 unidades.</div></div>
+      <div class="dish"><div class="name">Mousse de foie</div><div class="desc">Con compota ácida de manzana y sus tostas.</div></div>
+    </div>
+
+    <div class="course">
+      <h3>Pescados</h3>
+      <div class="dish"><div class="name">Bacalao al pil-pil de pimentón de Candeleda</div><div class="desc">El clásico de la casa.</div></div>
+      <div class="dish"><div class="name">Lenguado crujiente</div><div class="desc">Se come hasta la espina.</div></div>
+      <div class="dish"><div class="name">Atún rojo a la plancha</div><div class="desc">Con crema de morcilla de calabaza y mayonesa de ajo asado.</div></div>
+    </div>
+
+    <div class="course">
+      <h3>Carnes</h3>
+      <div class="dish"><div class="name">Cabrito a baja temperatura</div><div class="desc">Con crema de melocotón y mojo de pimiento amarillo.</div></div>
+      <div class="dish"><div class="name">Chuletón de ternera con hueso</div><div class="desc">1,2 kg, al humo de romero con su guarnición.</div></div>
+      <div class="dish"><div class="name">Presa de cerdo ibérico</div><div class="desc">Con patatas y tres mojos.</div></div>
+    </div>
+
+    <div class="course">
+      <h3>Postres</h3>
+      <div class="dish"><div class="name">Tarta de manzana</div><div class="desc">De feria.</div></div>
+      <div class="dish"><div class="name">Interpretación de tarta de queso</div><div class="desc">Con toffee.</div></div>
+    </div>
+
+    <p class="note">Precios, alérgenos y menú infantil: consúltalos en sala o por teléfono.</p>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap" style="display:contents">
+    <div>
+      <h2>Reservas</h2>
+      <p>Para realizar una reserva o consultar disponibilidad, llámanos. Si sois un grupo de 7 personas o más, recomendamos contactar por teléfono.</p>
+      <a class="btn" href="tel:920380635">Llamar al 920 380 635</a>
+    </div>
+    <div class="card">
+      <dl>
+        <dt>Dirección</dt><dd>Candeleda, Ávila</dd>
+        <dt>Teléfono</dt><dd>920 380 635</dd>
+        <dt>Email</dt><dd>elrefugiodechilla@gmail.com</dd>
+        <dt>Comidas</dt><dd>13:00 – 16:00</dd>
+        <dt>Cenas</dt><dd>20:00 – 23:30</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">El Refugio de Chilla · Candeleda, Ávila</div>
+</footer>
+
+<!--
+  Chat de Refu (widget del Agent Builder)
+  ----------------------------------------
+  1. En el panel del Agent Builder: pestaña Agentes → Importar .json → sube agents/refu.json → actívalo.
+  2. Pestaña "Chat web" → elige el agente Refu → añade este dominio en "webs autorizadas" → guarda.
+  3. Sustituye `data-chat="PENDIENTE_ID_CHAT"` por el identificador real del chat que te da el panel.
+-->
+<script
+  src="https://agent-factory-free.francopdimauro.workers.dev/widget.js"
+  data-chat="PENDIENTE_ID_CHAT"
+  data-label="Pregunta a Refu"
+  data-accent="#1f5c4a"
+  defer
+></script>
+
+</body>
+</html>
